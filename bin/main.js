@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 
-//the above line is called shebang and is used on linux to inform the system what type of script is being called
+//The above line is called shebang and is used on linux and UNIX to inform the system what type of script is being called
 
-//RUN THE COMMAND 'rmg' ON THE TERMINAL TO GET STARTED!!!
+//RUN THE COMMAND 'npm install -g' and then 'rmg' ON THE TERMINAL TO GET STARTED!!!
 
-// import modules
+// Import modules
+
  const chalk = require("chalk");
  const boxen = require("boxen");
  const fs = require("fs");
  const readline = require("readline");
 
- // declared variables for intro and end messages
+ // Declared variables for intro and end messages
+
  const introtext = chalk.green.bold("This is the beginning of this CLI application");
- const endtext = chalk.green.bold("Congratulation your ReadMe.md file has been successfully created");
+ const endtext = chalk.green.bold("Congratulation, your README.md file is ready");
  const styling = {
     margin: 1,
     padding:1,
@@ -23,18 +25,19 @@
 }
 const mainTxt = boxen(introtext , styling);
 
-// intro message log
-console.log(`${mainTxt}`);
-console.log(chalk.yellow("This will lead you through the process of creating a ReadMe.md file \n"))
+// Intro message log
 
-// prompt for user input
+console.log(`${mainTxt}`);
+console.log(chalk.yellow("This will walk you through the process of creating a README.md file \n"))
+
+// Prompt for user input
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 
-// questions
+// Questions
 
 rl.question(chalk.blue("Project Title: \n") , (one) => {
     rl.question(chalk.blue("Prerequisites: \n" ), (two) => {
@@ -45,18 +48,21 @@ rl.question(chalk.blue("Project Title: \n") , (one) => {
                         rl.question(chalk.blue("Versioning: \n") , (seven)=>{
                             rl.question(chalk.blue("License: \n") , (eight)=>{
 
-                                // this is the readMe content variable
-                                const content = `**#Project Title** \n ${one} 
-                                \n**#Prerequisitie** \n ${two} 
-                                \n**#Installing** \n ${three} 
-                                \n**#Running the tests** \n ${four} 
-                                \n**#Deployment** \n ${five} 
-                                \n**#Contributing** \n ${six}
-                                \n**#Versioning** \n ${seven}
-                                \n**#License** \n ${eight}` 
+                                // ReadMe.md content variable
+
+                                const content = `## Project Title \n ${one} 
+                                \n### Prerequisitie \n ${two} 
+                                \n## Installing \n ${three} 
+                                \n## Running the tests \n ${four} 
+                                \n## Deployment \n ${five} 
+                                \n## Contributing \n ${six}
+                                \n## Versioning \n ${seven}
+                                \n### License \n ${eight}` 
                                 ;
 
-                                  fs.writeFileSync('ReadMe.md',content,(err) =>{
+                                // Creation of the README.md file and appending it's content
+
+                                  fs.writeFileSync('README.md',content,(err) =>{
                                       if(err){
                                             console.log(err)
                                              }
@@ -72,7 +78,9 @@ rl.question(chalk.blue("Project Title: \n") , (one) => {
 })
 
 rl.on("close" , function(){
-    //end message log
+
+    //Ending message log
+
     console.log(boxen(endtext , styling))
     process.exit(0)
 })
